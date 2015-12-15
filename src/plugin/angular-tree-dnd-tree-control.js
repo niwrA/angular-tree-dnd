@@ -115,7 +115,16 @@ angular.module('ntt.TreeDnD')
                                 _parent = tree.get_parent(node).__children__;
                             } else {
                                 _parent = scope.treeData;
+                                var clearme = true;
                             }
+							
+							//BUG FIX, tree_nodes does not clear when last element
+	                        //is removed
+    	                    if (clearme){
+        	                    if (node.__index__ === 0){
+            	                    scope.tree_nodes = [];
+                	            }
+                    	    }
 
                             _parent.splice(node.__index__, 1);
 
