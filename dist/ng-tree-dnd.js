@@ -2597,7 +2597,7 @@
                     remove_node:                       function (node) {
                         node = node || tree.selected_node;
                         if (node) {
-                            if (node.__parent_real__ !== null) {
+                            if (node.__parent_real__) {
                                 _parent = tree.get_parent(node).__children__;
                             } else {
                                 _parent = scope.treeData;
