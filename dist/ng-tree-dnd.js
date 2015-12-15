@@ -95,7 +95,21 @@
         }]
 );
 
-angular.module('ntt.TreeDnD')    .directive(    'treeDndNodeHandle', function () {        return {            restrict: 'A',            scope:    true,            link:     function (scope, element, attrs) {                scope.$type = 'TreeDnDNodeHandle';                if (scope.$class.handle) {                    element.addClass(scope.$class.handle);                }            }        };    });
+angular.module('ntt.TreeDnD')
+    .directive(
+    'treeDndNodeHandle', function () {
+        return {
+            restrict: 'A',
+            scope:    true,
+            link:     function (scope, element, attrs) {
+                scope.$type = 'TreeDnDNodeHandle';
+                if (scope.$class.handle) {
+                    element.addClass(scope.$class.handle);
+                }
+            }
+        };
+    }
+);
 
 angular.module('ntt.TreeDnD')
     .directive(
@@ -3085,10 +3099,18 @@ angular.module('ntt.TreeDnD')
                             _parent = tree.get_parent(node).__children__;
                         } else {
                             _parent = scope.treeData;
+                            var clearme = true;
                         }
 
                         _parent.splice(node.__index__, 1);
 
+                        //BUG FIX, tree_nodes does not clear when last element
+                        //is removed
+                        if (clearme){
+                            if (node.__index__ === 0){
+                                scope.tree_nodes = [];
+                            }
+                        }
                         tree.reload_data();
 
                         if (tree.selected_node === node) {
