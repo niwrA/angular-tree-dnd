@@ -14,6 +14,7 @@
     template-url="tree-dnd-template.html"
     column-defs="col_defs"
     expand-on="expanding_property"
+    expand-level="3"
     on-select="my_tree_handler(node)"
     on-click="my_tree_handler(node)"
     data-indent="30"
